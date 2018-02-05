@@ -1,6 +1,6 @@
 // CSE 101 Winter 2018, PA 2
 //
-// Name: TODO put both partners' info if applicable
+// Name: Richard Chum
 // PID: TODO
 // Sources of Help: TODO
 // Due: February 9th, 2018 at 11:59 PM

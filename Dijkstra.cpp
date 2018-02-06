@@ -72,24 +72,34 @@ float dijkstra(Graph<T>&g, T src) {
 	{
 		//getting the smallest weighted vertex
 		auto current = pq.top();
+
+		//check visted
+		if( g.vertices[current.first]->visited == true)
+		{
+			pq.pop();
+			continue;
+		}
 		g.vertices[current.first]->visited = true;
+		auto currentPointer = g.vertices[current.first];
+
 		pq.pop();
 
 		for( auto edgeIt = g.vertices[current.first]->edges.begin(); edgeIt !=
 				g.vertices[current.first]->edges.end(); edgeIt++)
 		{
+			auto tempPointer = g.vertices[*edgeIt];
 			if( g.vertices[*edgeIt]->visited == true)
 			{
 				continue;
 			}
-			if( g.vertices[*edgeIt]->distance > g.vertices[src]->distance +
-					g.get_weight(src,*edgeIt))
+			if( g.vertices[*edgeIt]->distance > g.vertices[current.first]->distance +
+					g.get_weight(current.first,*edgeIt))
 			{
-				g.vertices[*edgeIt]->distance = g.vertices[src]->distance +
-					g.get_weight(src,*edgeIt);
+				g.vertices[*edgeIt]->distance = g.vertices[current.first]->distance +
+					g.get_weight(current.first,*edgeIt);
 				g.vertices[*edgeIt]->prev = current.first;
 			}
-			pq.push(std::make_pair(*edgeIt,g.get_weight(current.first,*edgeIt)));
+			pq.push(std::make_pair(*edgeIt,g.vertices[*edgeIt]->distance));
 		}
 	}
 
